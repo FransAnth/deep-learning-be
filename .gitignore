@@ -1,0 +1,59 @@
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.conda/
+conda_env/
+
+# Environment variables and secrets
+.env
+*.env
+*.secret
+
+# Package manager files
+pip-log.txt
+pip-delete-this-directory.txt
+poetry.lock
+
+# Distribution / build directories
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and debugging
+*.log
+*.out
+*.err
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+coverage.xml
+
+# MyPy type checking
+.mypy_cache/
+
+# Linting and formatting
+.pytest_cache/
+.tox/
+black.log
+ruff_cache/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# MacOS / System files
+.DS_Store
+Thumbs.db
