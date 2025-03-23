@@ -3,6 +3,6 @@ from django.urls import path
 from .views import DigitDataset, DigitRecogApiView
 
 urlpatterns = [
-    path("", DigitRecogApiView.as_view()),
-    path("dataset-info/", DigitDataset.as_view()),
+    path("recognize/", DigitRecogApiView.as_view()),
+    path("dataset/", DigitDataset.as_view()),
 ]
