@@ -29,11 +29,7 @@ class TicTacToe(APIView):
 
         response_data = {
             "confidense": confidense[0],
-            "modelPrediction": prediction[0] + 1,
+            "modelPrediction": prediction[0],
         }
-
-        # Added 1 to the prediction[0] because the training data labels
-        # is from 0 - 8 and we need to shift one position to make it
-        # 1 - 9 that represents the 1st board up until the 9th board
 
         return Response(response_data)
