@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from DeepLearning.nn_models.neural_network import NeuralNetwork
+from DigitRecognition.ai_resources.nn_classes.neural_network import NeuralNetwork
 
 from .models import DigitRecognitionTrainingData
 from .serializers import DigitRecognitionSerializer
@@ -15,10 +15,13 @@ from .serializers import DigitRecognitionSerializer
 input_size = 784  # 28x28 pixels
 hidden_size = 128
 output_size = 10  # Digits 0-9
+hidden_layer_count = 3
 
-digit_model = NeuralNetwork(input_size, hidden_size, output_size)
+digit_model = NeuralNetwork(input_size, hidden_size, output_size, hidden_layer_count)
 digit_model.load_state_dict(
-    torch.load("DeepLearning/nn_models/trained_models/neural_network.pth")
+    torch.load(
+        f"DigitRecognition/ai_resources/trained_ai_models/neural_network_{hidden_layer_count}HL.pth"
+    )
 )
 print("model_loaded")
 digit_model.eval()
@@ -33,14 +36,17 @@ class DigitRecogApiView(APIView):
         pixels = [float(x) for x in digit_pixels.split(",")]
         pixel_tensor = torch.tensor(pixels, dtype=torch.float)
 
-        plt.gray()
-        plt.imshow(pixel_tensor.view(28, 28), interpolation="nearest")
-        plt.axis("off")  # Remove axes for a clean image
-        plt.savefig("digit.png", dpi=300, bbox_inches="tight")
+        # plt.gray()
+        # plt.imshow(pixel_tensor.view(28, 28), interpolation="nearest")
+        # plt.axis("off")  # Remove axes for a clean image
+        # plt.savefig("digit.png", dpi=300, bbox_inches="tight")
 
         output = digit_model(pixel_tensor.view(-1, 28 * 28))
-        _, prediction = torch.max(output, 1)  # Get the highest probability class
+        confidence, prediction = torch.max(
+            output, 1
+        )  # Get the highest probability class
 
+        print("Confidense", confidence)
         return Response(prediction[0].item())
 
 
